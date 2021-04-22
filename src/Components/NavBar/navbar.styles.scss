@@ -1,0 +1,31 @@
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  
+  width: 95%;
+  margin: auto;
+
+  background-color: whitesmoke;
+  height: 10vh;
+
+  .logo-container {
+    flex: 1;
+
+    .logo {
+      height: 10vh;
+    }
+
+  }
+
+  .container {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .cart-btn {
+      height: 7.5vh;
+    }
+
+  }
+}

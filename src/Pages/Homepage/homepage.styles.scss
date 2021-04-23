@@ -1,8 +1,6 @@
 .homepage {
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: space-between;
-  height: 250vh;
+  overflow: hidden;
+  height: 265vh;
 
   .main {
     height: 95vh;
@@ -83,6 +81,36 @@
 
     }
 
+  }
+
+  .trending {
+    margin-bottom: 10vh;
+  }
+
+  .head {
+    margin: 3vh;
+
+    font-family: Barlow;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 3.5em;
+
+    text-align: center;
+
+    color: #000000;
+  }
+
+  .divider {
+    width: 4em;
+    margin-bottom: 2vw;
+  }
+  
+  .thin {
+    border: 0.1em solid;
+  }
+  
+  .thick {
+    border: 0.2em solid #132C4A;
   }
 
 }

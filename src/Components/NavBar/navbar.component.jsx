@@ -5,7 +5,7 @@ import NavBarItem from '../NavBarItem/navbar-item.component'
 
 import './navbar.styles.scss'
 
-const NavBar = ({}) => {
+const NavBar = () => {
   return (
     <div className="nav-bar">
     <div className="logo-container">
@@ -13,8 +13,8 @@ const NavBar = ({}) => {
     </div>
 
       <div className="container">
-        <NavBarItem title="Products"/>
-        <NavBarItem title="Reviews"/>
+        <NavBarItem title="Products" to_url="/store"/>
+        <NavBarItem title="Reviews" to_url="/reviews"/>
 
         { /* Sign in button */ }
         <span className="sign-in-btn"> Sign In </span>

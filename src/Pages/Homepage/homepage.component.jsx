@@ -9,7 +9,21 @@ const Homepage = ({}) => {
       <NavBar />
 
       <div className="main">
-        Main
+
+        <div className="container">
+
+        <div className="head">
+          <h1 className="title">Serban's Tuica SRL</h1>
+          <p className="description">
+          Award winning products with the most <br/>
+          fancy and great taste you ever saw.
+          </p>
+        </div>
+
+          <button className="shop-btn">Shop now</button>
+
+        </div>
+
       </div>
 
       <Footer />

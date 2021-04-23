@@ -1,6 +1,6 @@
 import React from 'react'
-import logo from './default.svg'
-import cart from './cart.svg'
+import logo from './Assets/default.svg'
+import cart from './Assets/cart.svg'
 import NavBarItem from '../NavBarItem/navbar-item.component'
 
 import './navbar.styles.scss'

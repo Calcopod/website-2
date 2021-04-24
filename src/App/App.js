@@ -1,12 +1,15 @@
 import React from 'react'
 import Homepage from '../Pages/Homepage/homepage.component.jsx'
+import NavBar from '../Components/NavBar/navbar.component'
 import { Switch, Route } from 'react-router-dom'
 
 import './App.css';
+import SignInAndUp from '../Pages/Sign-in&up/sign-in-and-up.component.jsx';
 
 function App() {
   return (
     <div>
+      <NavBar />
       <Switch>
         <Route exact path="/">
           <Homepage />
@@ -19,7 +22,7 @@ function App() {
             -Someone, sometime
         </Route>
         <Route exact path="/sign-in">
-          Sign in
+          <SignInAndUp />
         </Route>
       </Switch>
     </div>

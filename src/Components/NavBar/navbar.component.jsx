@@ -1,26 +1,29 @@
 import React from 'react'
 import logo from './Assets/default.svg'
 import cart from './Assets/cart.svg'
-import NavBarItem from '../NavBarItem/navbar-item.component'
+
+import { Link } from 'react-router-dom'
 
 import './navbar.styles.scss'
 
 const NavBar = () => {
   return (
     <div className="nav-bar">
-    <div className="logo-container">
-      <img alt="Logo" className="logo" src={logo} />
-    </div>
+      <div className="logo-container" to="/">
+        <Link to="/">
+          <img alt="Logo" className="logo" src={logo} />
+        </Link>
+      </div>
 
       <div className="container">
-        <NavBarItem title="Products" to_url="/store"/>
-        <NavBarItem title="Reviews" to_url="/reviews"/>
+        <Link className="option" to="/store">Prodcuts</Link>
+        <Link className="option" to="/reviews">Reviews</Link>
 
-        { /* Sign in button */ }
-        <span className="sign-in-btn"> Sign In </span>
+        <Link className="option" to="/sign-in"> Sign In </Link>
 
-        { /* Cart button */ }
-        <img alt="cart" className="cart-btn" src={cart} />
+        <Link className="option" to="/cart">
+          <img className="cart-btn" alt="cart" src={cart} />
+        </Link>
       </div>
 
     </div>

@@ -26,6 +26,17 @@
     justify-content: space-around;
     align-items: center;
 
+    .option {
+      text-decoration: none;
+      font-size: 22px;
+      color: #787878;
+
+      &:hover {
+        color: #2c2c2c;
+      }
+
+    }
+
     .cart-btn {
       height: max(4vh, 10px);
     }

@@ -11,8 +11,6 @@ import './homepage.styles.scss'
 const Homepage = ({match, history}) => {
   return (
     <div className="homepage">
-      <NavBar />
-
       <div className="main">
         <div className="container">
 

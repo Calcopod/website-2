@@ -1,5 +1,4 @@
 import React from 'react';
-import NavBar from '../../Components/NavBar/navbar.component'
 import Footer from '../../Components/Footer/footer.component'
 import ReviewDirectory from '../../Components/Directory3/rev-dir/dir3.component';
 import TrendingDirectory from '../../Components/Directory3/trending-dir/trending-dir.component';

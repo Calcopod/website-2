@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import CustomButton from '../CustomButton/custom-btn.component'
 import InputForm from '../InputForm/input-form.component'
+import { auth, signInWithGoogle } from '../../Firebase/firebase.utility'
 import './sign-in.styles.scss'
 
 class SignIn extends Component {
@@ -19,10 +20,18 @@ class SignIn extends Component {
     this.setState({ [name]: value })
   }
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
 
-    this.setState({ email: '', password: '' })
+    // Sign user in:
+    try {
+      const { email, password } = this.state
+
+      await auth.signInWithEmailAndPassword(email, password)
+      this.setState({ email: '', password: '' })
+    } catch ( error ) {
+      console.error( "An error occured during meial sign-in: ", error )
+    }
   }
 
   render() {
@@ -41,16 +50,19 @@ class SignIn extends Component {
           />
 
           <InputForm
-          value={this.state.password}
-          onChange={this.handleChange}
-          type="password"
-          name="password"
-          label="Password"
-        />
+            value={this.state.password}
+            onChange={this.handleChange}
+            type="password"
+            name="password"
+            label="Password"
+          />
 
-        <CustomButton type="submit">
-          Sign In
-        </CustomButton>
+          <div className="buttons">
+            <CustomButton type="submit">Sign In</CustomButton>
+            <CustomButton type="button" onClick={signInWithGoogle} isGoogleAuth>
+              Sign In With Google
+            </CustomButton>
+          </div>
 
         </form>
       </div>

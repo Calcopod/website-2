@@ -1,5 +1,10 @@
 .sign-in {
-  width: min(30vw, 380px);
+  width: 440px;
 
   padding: 20px;
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+  }
 }

@@ -3,10 +3,11 @@ import logo from './Assets/default.svg'
 import cart from './Assets/cart.svg'
 
 import { Link } from 'react-router-dom'
+import { auth } from '../../Firebase/firebase.utility'
 
 import './navbar.styles.scss'
 
-const NavBar = () => {
+const NavBar = ( {currentUser} ) => {
   return (
     <div className="nav-bar">
       <div className="logo-container" to="/">
@@ -19,7 +20,14 @@ const NavBar = () => {
         <Link className="option" to="/store">Prodcuts</Link>
         <Link className="option" to="/reviews">Reviews</Link>
 
-        <Link className="option" to="/sign-in"> Sign In </Link>
+        {
+          currentUser ?
+          <div className="option" onClick={() => auth.signOut()}>Sign Out</div>
+          :
+          <Link className="option" to="/sign-in"> Sign In </Link>
+        }
+
+        
 
         <Link className="option" to="/cart">
           <img className="cart-btn" alt="cart" src={cart} />

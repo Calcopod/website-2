@@ -26,18 +26,19 @@ export const createUserProfile = async ( authObject, otherProps ) => {
   const userRef = firestore.doc(`users/${ authObject.uid }`)
   const userSnapshot = await userRef.get()
 
-  if( !userSnapshot.data() ) {
+  if( !userSnapshot.exists ) {
     // Create a new object with all of the info we want:
     const { displayName, email } = authObject
-    const userProfile = {
-      displayName: displayName,
-      email: email,
-      createdAt: new Date(),
-      ...otherProps
-    }
+    const createdAt = new Date()
+
     // Add user to database:
     try {
-      userRef.set( userProfile )
+      userRef.set({
+        displayName,
+        email,
+        createdAt,
+        ...otherProps
+      })
     } catch ( error ) {
       console.log(" An error occured: " , error )
     }

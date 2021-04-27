@@ -28,13 +28,15 @@ class App extends Component {
 
       if( user ) {
         const userRef = await createUserProfile( user );
-        const userSnapShot = await userRef.get();
-        const userData = await userSnapShot.data();
+        
+        userRef.onSnapshot( snapshot => {
+          const userData = snapshot.data()
 
-        this.setState({currentUser: {
-          ...userData,
-          uid: userSnapShot.id
-        }}, () => console.log( this.state.currentUser ) )
+          this.setState({currentUser: {
+            ...userData,
+            uid: snapshot.id
+          }}, () => console.log( "Current user: ", this.state.currentUser ) )
+        })
       }
       else {
         this.setState({ currentUser: null })
@@ -66,6 +68,7 @@ class App extends Component {
             <SignInAndUp />
           </Route>
         </Switch>
+        <h1>{this.state.currentUser?.displayName}</h1>
       </div>
     );
   }

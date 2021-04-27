@@ -25,27 +25,33 @@ class SignUp extends Component {
   handleSubmit = async event => {
     event.preventDefault()
 
+    const { displayName, email, password, verifyPassword } = this.state;
+
     // Check if password and password verify are the same:
-    if( this.state.password !== this.state.verifyPassword ) {
+    if( password !== verifyPassword ) {
       alert("Passwords do not match!")
       return
     };
-  
-    const { displayName } = this.state
 
     try {
       // Auth user using firebase:
-      const { user } = auth.createUserWithEmailAndPassword( this.state.email, this.state.password )
-      
-      const userObj = {
-        displayName: displayName,
-        ...user
-      }
+      const { user } = await auth.createUserWithEmailAndPassword( 
+        email, 
+        password 
+      )
 
-      createUserProfile( userObj )
+      await createUserProfile( user, { displayName } )
+
+      // Clear inputs:
+      this.setState({
+        displayName: '',
+        email: '',
+        password: '',
+        verifyPassword: ''
+      })
 
     } catch ( error ) {
-      console.log("An error occured during email sign-up: ", error)
+      console.error("An error occured during email sign-up: ", error)
     }
 
   }
@@ -75,7 +81,7 @@ class SignUp extends Component {
           />
 
           <InputForm
-            type="text"
+            type="password"
             name="password"
             label="Password:"
             value={this.state.password}
@@ -84,7 +90,7 @@ class SignUp extends Component {
           />
 
           <InputForm
-            type="text"
+            type="password"
             name="verifyPassword"
             label="Verify Password:"
             value={this.state.verifyPassword}

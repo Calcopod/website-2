@@ -17,6 +17,7 @@ class App extends Component {
   }
 
   unsubscribeFromAuth = null
+  unsubscribeFromUserSnap = null
 
   componentDidMount() {
     // Subscribe to auth:
@@ -29,7 +30,7 @@ class App extends Component {
       if( user ) {
         const userRef = await createUserProfile( user );
         
-        userRef.onSnapshot( snapshot => {
+        this.unsubscribeFromUserSnap = userRef.onSnapshot( snapshot => {
           const userData = snapshot.data()
 
           this.setState({currentUser: {
@@ -45,8 +46,9 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-    // Unsubscribe to auth:
+    // Unsubscribe to auth and other listeners:
     this.unsubscribeFromAuth()
+    this.unsubscribeFromUserSnap()
   }
 
   render() {

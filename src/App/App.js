@@ -3,7 +3,7 @@ import Homepage from '../Pages/Homepage/homepage.component.jsx'
 import NavBar from '../Components/NavBar/navbar.component'
 import { Switch, Route } from 'react-router-dom'
 import SignInAndUp from '../Pages/Sign-in&up/sign-in-and-up.component.jsx';
-import { auth } from '../Firebase/firebase.utility'
+import { auth, createUserProfile } from '../Firebase/firebase.utility'
 
 import './App.css';
 
@@ -20,10 +20,25 @@ class App extends Component {
 
   componentDidMount() {
     // Subscribe to auth:
-    this.unsubscribeFromAuth = auth.onAuthStateChanged( user => {
-      this.setState({currentUser: user})
+    this.unsubscribeFromAuth = auth.onAuthStateChanged( async user => {
+      // Check for sign-in rather than sign-out
 
-      console.log( user )
+      // Snapshot returns never-ending function always checking for new input, which in this case is never, cuz I don't update users.
+      // That's why I cna just use, userRef.
+
+      if( user ) {
+        const userRef = await createUserProfile( user );
+        const userSnapShot = await userRef.get();
+        const userData = await userSnapShot.data();
+
+        this.setState({currentUser: {
+          ...userData,
+          uid: userSnapShot.id
+        }}, () => console.log( this.state.currentUser ) )
+      }
+      else {
+        this.setState({ currentUser: null })
+      }
     })
   }
 

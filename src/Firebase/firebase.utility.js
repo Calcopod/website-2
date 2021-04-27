@@ -18,6 +18,35 @@ firebase.initializeApp( config )
 export const auth = firebase.auth()
 export const firestore = firebase.firestore()
 
+export const createUserProfile = async ( authObject, otherProps ) => {
+  // This will fire on sign out as well:
+  if ( !authObject ) return
+
+  // Get the user ref and check if it is empty
+  const userRef = firestore.doc(`users/${ authObject.uid }`)
+  const userSnapshot = await userRef.get()
+
+  if( !userSnapshot.data() ) {
+    // Create a new object with all of the info we want:
+    const { displayName, email } = authObject
+    const userProfile = {
+      displayName: displayName,
+      email: email,
+      createdAt: new Date(),
+      ...otherProps
+    }
+    // Add user to database:
+    try {
+      userRef.set( userProfile )
+    } catch ( error ) {
+      console.log(" An error occured: " , error )
+    }
+  }
+
+  return userRef;
+
+}
+
 const provider = new firebase.auth.GoogleAuthProvider()
 provider.setCustomParameters({
   prompt: 'select_account'

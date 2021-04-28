@@ -5,6 +5,8 @@ import cart from './Assets/cart.svg'
 import { Link } from 'react-router-dom'
 import { auth } from '../../Firebase/firebase.utility'
 
+import { connect } from 'react-redux'
+
 import './navbar.styles.scss'
 
 const NavBar = ( {currentUser} ) => {
@@ -38,4 +40,9 @@ const NavBar = ( {currentUser} ) => {
   )
 }
 
-export default NavBar
+const mapStateToProps = state => ({
+  // Acces the user reducer
+  currentUser: state.user.currentUser
+})
+
+export default connect(mapStateToProps, null)(NavBar)
